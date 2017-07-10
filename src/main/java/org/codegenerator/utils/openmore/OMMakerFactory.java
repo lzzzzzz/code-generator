@@ -16,7 +16,7 @@ public class OMMakerFactory{
 
 
     /**指定模板名和生成文件名
-     * @param flag: 生成文件类型
+     * @param flag: 生成文件类型@link(OMMakerConfig)
      * @param fileName: 生成文件名称
      * @param root: 所需元素
      * */
