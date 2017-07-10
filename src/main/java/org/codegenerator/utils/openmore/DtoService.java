@@ -16,8 +16,17 @@ import java.util.Map;
 public class DtoService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 传入所需元素参数生成（可选）目标文件
+     * @param t: 生成文件类型 @link(OMMakerConfig)
+     * @param className: 文件名称
+     * @param className_zn: 文件中文描述
+     * @param attrs: 所需元素
+     * @param controller_desc: controller描述信息
+     * @param flag_creat_file: 是否生成目标文件
+     * */
     public DtoResponse pageCreateDto( String t , String className , String className_zn ,
-                              String attrs , String controller_desc ){
+                              String attrs , String controller_desc , boolean flag_creat_file){
         List<DtoParam> att=null;
         try{
             Gson gson=new Gson();
@@ -60,11 +69,12 @@ public class DtoService {
             } else {
                 return new DtoResponse( new Exception ( "参数错误->create type("+t+") is invalid" ));
             }
-            OMMakerFactory.freeMaker(create_type,className,root);
+            if(flag_creat_file){
+                OMMakerFactory.freeMaker(create_type,className,root);
+            }
             return OMMakerFactory.freeMaker(create_type,root);
         }catch (Exception e){
             return new DtoResponse(e);
         }
-
     }
 }
