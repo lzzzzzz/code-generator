@@ -5,13 +5,16 @@ package org.codegenerator.entity;
  */
 public class DtoResponse {
 
-    private int RESPONSE_CODE_SUCCESS=0x01;
-    private int RESPONSE_CODE_ERROR=0x02;
+    /**Success code(成功状态码)*/
+    public static final int RESPONSE_CODE_SUCCESS=0x01;
+    /**Errorcode(失败状态码)*/
+    public static final int RESPONSE_CODE_ERROR=0x02;
 
+    /**结果状态*/
     private int responseCode = RESPONSE_CODE_ERROR;
-
+    /**包含的异常*/
     private Exception e;
-
+    /**返回结果数据*/
     private String response_data;
 
     public DtoResponse(Exception e){
