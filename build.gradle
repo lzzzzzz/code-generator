@@ -1,0 +1,48 @@
+group 'cn.org.rapid_framework.genetator'
+version '1.5.4'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+
+// 配置资源目录
+sourceSets {
+    main {
+
+        java {
+            srcDir 'src/main/java'
+        }
+
+        resources {
+            srcDir("src/main/resources")
+        }
+    }
+}
+
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
+}
+
+dependencies {
+    //maven仓库中心没有的jar，则放入libs目录下
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // 日志
+    compile 'ch.qos.logback:logback-classic:1.1.1'
+
+    // Map工具类
+    compile 'commons-collections:commons-collections:3.2'
+
+    //freeMaker
+    compile group: 'org.freemarker', name: 'freemarker', version:'2.3.23'
+
+    //Gson解析
+    compile 'com.google.code.gson:gson:2.6.2'
+
+    compile 'org.springframework:spring-context-support:4.3.7.RELEASE'
+}
