@@ -18,8 +18,8 @@
 
 
 ## 2.文件说明：
-  * 需要在主目录下创建template文件
-  * template下创建template-model二级文件用于存放模板文件
+  * 需要在主目录下创建template目录
+  * template下创建template-model二级文件用于存放模板文件
   * 默认使用template-model下的模板（可制定其它生成目录）
   * 项目源码默认输出template/template-resource目录下，openmore源码文件指定生成在目标目录下
 
