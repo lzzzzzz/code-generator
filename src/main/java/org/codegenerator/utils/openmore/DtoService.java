@@ -61,7 +61,7 @@ public class DtoService {
                 return new DtoResponse( new Exception ( "参数错误->create type("+t+") is invalid" ));
             }
             OMMakerFactory.freeMaker(create_type,className,root);
-            return new DtoResponse(OMMakerFactory.freeMaker(create_type,root));
+            return OMMakerFactory.freeMaker(create_type,root);
         }catch (Exception e){
             return new DtoResponse(e);
         }
