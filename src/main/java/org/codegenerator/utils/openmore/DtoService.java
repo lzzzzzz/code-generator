@@ -19,14 +19,28 @@ public class DtoService {
 
     /**
      * 传入所需元素参数生成（可选）目标文件
-     * @param t: 生成文件类型 @link(OMMakerConfig)
+     * @param om: 封装参数模型
+     * */
+    public DtoResponse pageCreateDto(OpenMoreEntity om){
+       if(null==om) {
+           return new DtoResponse(new Exception("参数错误"));
+       }
+       return pageCreateDto(om.getModel_name(),om.getBase_package(),om.getSub_package(),
+               om.getClassName(),om.getClassName_zn(),om.getAttrs(),om.getController_desc(),om.getFlag_create_file());
+    }
+
+/**
+     * 传入所需元素参数生成（可选）目标文件
+     * @param model_name: 模板文件名称
+     * @param base_package: 生成文件一级目录
+     * @param base_package: 生成文件二级目录级目录
      * @param className: 文件名称
      * @param className_zn: 文件中文描述
      * @param attrs: 所需元素
      * @param controller_desc: controller描述信息
      * @param flag_creat_file: 是否生成目标文件
      * */
-    public DtoResponse pageCreateDto( String t , String className , String className_zn ,
+    public DtoResponse pageCreateDto( String model_name , String base_package, String sub_package, String className , String className_zn ,
                               String attrs , String controller_desc , boolean flag_creat_file){
         List<DtoParam> att=null;
         try{
@@ -48,32 +62,20 @@ public class DtoService {
         }
         try {
             Map<String, Object> root = new HashMap<String, Object>();
-            root.put("basepackage", "org.openmore");
+            root.put("basepackage", base_package);
+            root.put("subpackage", sub_package);
             root.put("className", className);
             root.put("className_zn", className_zn);
             //root.put("attrs", attrs);
             root.put("controller_desc", controller_desc);
             root.put("attrs",att);
-            if(null==t){
-                return new DtoResponse(new Exception("参数错误->t is null"));
-            }
-            //添加生成类型
-            int create_type=0;
-            if (t.equals("dto")) {//生成dto
-                create_type=OMMakerConfig.FLAG_CREATE_DTO_API;
-            } else if (t.equals("service")) {//生成service
-                create_type=OMMakerConfig.FLAG_CREATE_SERVICE;
-            } else if(t.equals("serviceImpl")){//生成serviceImpl
-                create_type=OMMakerConfig.FLAG_CREATE_SERVICE_IMPL;
-            }else if (t.equals("controller")) {//生成controller
-                create_type=OMMakerConfig.FLAG_CREATE_CONTROLLER_API;
-            } else {
-                return new DtoResponse( new Exception ( "参数错误->create type("+t+") is invalid" ));
-            }
             if(flag_creat_file){
-                OMMakerFactory.freeMaker(create_type,className,root);
+                DtoResponse re=OMMakerFactory.freeMaker(model_name, base_package,sub_package, className,root);
+                if(re.getResponseCode()==DtoResponse.RESPONSE_CODE_ERROR){
+                    logger.error("freeMaker==>创建输出文件出错:"+re.getE().getMessage());
+                }
             }
-            return OMMakerFactory.freeMaker(create_type,root);
+            return OMMakerFactory.freeMaker(model_name,root);
         }catch (Exception e){
             return new DtoResponse(e);
         }

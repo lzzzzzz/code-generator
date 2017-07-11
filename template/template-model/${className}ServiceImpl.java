@@ -1,4 +1,4 @@
-package ${basepackage!""}.${subpackage!""}.impl;
+package ${basepackage!""}.${subpackage!""};
 
 import ${basepackage!""}.${subpackage!""}.dto.service.${className!""}Service;
 

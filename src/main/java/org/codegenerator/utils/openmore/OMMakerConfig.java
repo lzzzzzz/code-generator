@@ -43,4 +43,8 @@ public class OMMakerConfig {
     public static String PROJECT_SUB_PACKAGE_CONTROLLER_API="controller.api";
     public static String PROJECT_SUB_PACKAGE_CONTROLLER_COMMON="controller.common";
 
+
+    public static String PROJECT_BASE_PACKAGE_STR="base_package";
+    public static String PROJECT_SUB_PACKAGE_STR="base_package";
+
 }

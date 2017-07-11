@@ -70,14 +70,20 @@ public class FreeMakerFactory {
         try{
             //设置输出源码文件
             if(out_file.isDirectory()){
-                logger.debug("Freemaker请指定正确数据输出文件路径=>file_path：("+out_file.getPath()+")");
+                logger.error("Freemaker请指定正确数据输出文件路径=>file_path：("+out_file.getPath()+")");
                 return new DtoResponse(new RuntimeException("请指定正确数据输出文件路径=>file_path：("+out_file.getPath()+")"));
             }
             if(!out_file.exists()){
+                if(!out_file.getParentFile().exists()){
+                    if(!out_file.getParentFile().mkdirs()) {
+                        return new DtoResponse(new RuntimeException("创建目标文件目录失败=>file_path：("+out_file.getPath()+")"));
+                    }
+                }
                 out_file.createNewFile();
             }
         }catch (Exception e){
-            logger.debug("Freemaker指定了错误数据输出文件=>file_path：("+out_file.getPath()+")");
+            e.printStackTrace();
+            logger.error("Freemaker指定了错误数据输出文件=>file_path：("+out_file.getPath()+")");
             return new DtoResponse(new RuntimeException("请指定正确数据输出文件"));
         }
         //生成文件
@@ -117,11 +123,10 @@ public class FreeMakerFactory {
                     source_dir.mkdirs();
                 }
             }
-
             //设置输出源码文件
             File out_file = new File(source_path + "\\" + fileName);
             if (out_file.isDirectory()) {
-                logger.debug("请指定数据输出文件，而非目录：" + out_file.getPath());
+                logger.error("请指定数据输出文件，而非目录：" + out_file.getPath());
                 return new DtoResponse(new RuntimeException("请指定数据输出文件，而非目录：" + out_file.getPath()));
             }
             if (!out_file.exists()) {

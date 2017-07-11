@@ -1,4 +1,4 @@
-package ${basepackage!""}.${subpackage!""}.api;
+package ${basepackage!""}.${subpackage!""};
 
 @ApiModel("${className_zn!""}显示模型")
 public class ${className!""}Dto {

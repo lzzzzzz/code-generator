@@ -1,8 +1,13 @@
 package org.codegenerator.test;
 
 
+import com.google.gson.Gson;
 import org.codegenerator.entity.DtoImage;
+import org.codegenerator.entity.DtoResponse;
 import org.codegenerator.utils.DtoCreaterUtils.*;
+import org.codegenerator.utils.openmore.DtoService;
+import org.codegenerator.utils.openmore.OMMakerConfig;
+import org.codegenerator.utils.openmore.OMMakerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -20,7 +25,7 @@ import java.util.Map;
 public class Test {
 
     public static void main(String[] args){
-        test4();
+        test5();
 
     }
 
@@ -69,5 +74,30 @@ public class Test {
             e.printStackTrace();
             System.out.println("出错");
         }
+    }
+    private static void test5(){
+        List<DtoParam> list=new ArrayList<DtoParam>();
+        //DtoParam ap1=new DtoParam("id","int","省份id");
+        DtoParam ap2=new DtoParam("id","int","省份id");
+        DtoParam ap3=new DtoParam("name","String","姓名");
+        list.add(ap2);
+        list.add(ap3);
+        String base_pa="org.codegenerator";
+        String sub_pa="";
+        /*ProjectPathHelper helper=new ProjectPathHelper();
+        String out_file_dir=helper.getBasepackagePath(base_pa);
+        out_file_dir=out_file_dir+ProjectPathHelper.splidFileName(sub_pa);
+        File outfile=new File("C:\\Users\\LZ\\Desktop\\test2.xml");*/
+        Gson gson=new Gson();
+        String attrs=gson.toJson(list);
+        DtoService service=new DtoService();
+        DtoResponse re= service.pageCreateDto("${className}Dto.java", base_pa, sub_pa, "Person",
+                "学生",attrs,"学生控制器",true);
+        if(re.getResponseCode()==DtoResponse.RESPONSE_CODE_SUCCESS){
+            System.out.println(re.getResponse_data());
+        }else{
+            System.out.println(re.getE().getMessage());
+        }
+
     }
 }

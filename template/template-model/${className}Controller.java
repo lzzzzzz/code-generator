@@ -1,4 +1,4 @@
-package ${basepackage!""}.${subpackage!""}.api;
+package ${basepackage!""}.${subpackage!""};
 
 import io.swagger.annotations.*;
 import ${basepackage!""}.${subpackage!""}.common.BaseController;

@@ -28,7 +28,7 @@ public class DtoFileUtils {
         }
     }
 
-    /**获取模块根目录*/
+    /**获取模板根目录*/
     public static String getRootGeneratorDirectory() throws Exception{
             String projectPath= FreeMakerConfig.ROOT_PATH+"\\"+ FreeMakerConfig.MODEL_ROOT_DIRECTORY;
             File file=new File(projectPath);
