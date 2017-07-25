@@ -5,8 +5,6 @@ package org.codegenerator.utils.openmore;
  */
 public class OpenMoreEntity {
     private String model_name;
-    private String base_package;
-    private String sub_package;
     private String className;
     private String className_zn;
     private String attrs;
@@ -20,22 +18,6 @@ public class OpenMoreEntity {
 
     public void setModel_name(String model_name) {
         this.model_name = model_name;
-    }
-
-    public String getBase_package() {
-        return base_package;
-    }
-
-    public void setBase_package(String base_package) {
-        this.base_package = base_package;
-    }
-
-    public String getSub_package() {
-        return sub_package;
-    }
-
-    public void setSub_package(String sub_package) {
-        this.sub_package = sub_package;
     }
 
     public String getClassName() {
