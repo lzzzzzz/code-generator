@@ -16,6 +16,7 @@
   * **v1.02:  compile 'com.github.lzzzzzz:code-generator:v1.02'**
   * **v1.03:  compile 'com.github.lzzzzzz:code-generator:v1.03'**
   * **v1.04:  compile 'com.github.lzzzzzz:code-generator:v1.04'**
+  * **v1.04.1:  compile 'com.github.lzzzzzz:code-generator:v1.04.1'**
 
 
 ## 2.模板及生成文件目录说明：
@@ -90,6 +91,9 @@
   ### v1.04:
     * FreeMakerFactory基本功能库不受影响
     * openmore定制内容方法参数中添加生成文件目录的一级包铭和二级包名，用于文件内使用和创建生成文件在制定位置
+  ### v1.04.1:
+    * FreeMakerFactory基本功能库不受影响
+    * openmore定制内容生成固定报名下源码文件
     
     
     
