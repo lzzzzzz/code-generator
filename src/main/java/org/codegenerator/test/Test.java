@@ -82,8 +82,7 @@ public class Test {
         DtoParam ap3=new DtoParam("name","String","姓名");
         list.add(ap2);
         list.add(ap3);
-        String base_pa="org.codegenerator";
-        String sub_pa="";
+        String t="dtoApi";
         /*ProjectPathHelper helper=new ProjectPathHelper();
         String out_file_dir=helper.getBasepackagePath(base_pa);
         out_file_dir=out_file_dir+ProjectPathHelper.splidFileName(sub_pa);
@@ -91,7 +90,7 @@ public class Test {
         Gson gson=new Gson();
         String attrs=gson.toJson(list);
         DtoService service=new DtoService();
-        DtoResponse re= service.pageCreateDto("${className}Dto.java", base_pa, sub_pa, "Person",
+        DtoResponse re= service.pageCreateDto(t, "Person",
                 "学生",attrs,"学生控制器",true);
         if(re.getResponseCode()==DtoResponse.RESPONSE_CODE_SUCCESS){
             System.out.println(re.getResponse_data());
