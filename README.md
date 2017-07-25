@@ -15,6 +15,7 @@
   * **v1.01:  compile 'com.github.lzzzzzz:code-generator:v1.01'**
   * **v1.02:  compile 'com.github.lzzzzzz:code-generator:v1.02'**
   * **v1.03:  compile 'com.github.lzzzzzz:code-generator:v1.03'**
+  * **v1.04:  compile 'com.github.lzzzzzz:code-generator:v1.04'**
 
 
 ## 2.模板及生成文件目录说明：
@@ -56,19 +57,28 @@
     
   ### openmore定制内容（用于指定一级目录、二级目录、直接在项目中目标包下生成源码文件）
 
-     /**指定模板名和生成文件名（同时生成目标文件）
-     * @param flag: 生成文件类型@link(OMMakerConfig)
+     /**指定模板名和目标文件名生成源码文件
+     * @param model_file_name: 模板文件名称
+     * @param base_package: 生成文件一级目录
+     * @param base_package: 生成文件二级目录级目录
      * @param fileName: 生成文件名称
      * @param root: 所需元素
      * */
-    public static DtoResponse freeMaker( int flag , String fileName , Map<String, Object> root ){...}
+    public static DtoResponse freeMaker(String model_file_name, String base_package, String sub_package, 
+    String fileName , Map<String, Object> root ){...}
     
-    /**指定模板名生成所需源码（不生成生成目标文件）
-     * @param flag: 生成文件类型@link(OMMakerConfig)
+    /**指定模板名和目标文件名生成
+    源码文件 * @param model_file_name: 模板文件名称
+     * @param file_path: 生成文件路径
      * @param root: 所需元素
      * */
-    public static DtoResponse freeMaker(int flag , Map<String, Object> root ) {...}
+    public static DtoResponse freeMaker(String model_file_name, String file_path , Map<String, Object> root ) {...}
     
+    /**指定模板名生成所需源码
+     * @param model_file_name: 模板文件
+     * @param root: 所需元素
+     * */
+    public static DtoResponse freeMaker(String model_file_name, Map<String, Object> root ){...} 
     
 ## 3.版本说明：
   ### v1.01:
@@ -77,7 +87,10 @@
     * 修改返回值错误状态码
   ### v1.03:
     * 修改异常捕获方式（非抛出式）
-    
+  ### v1.04:
+    * FreeMakerFactory基本功能库不受影响
+    * openmore定制内容方法参数中添加生成文件目录的一级包铭和二级包名，用于文件内使用和创建生成文件在制定位置
+    
     
     
     
