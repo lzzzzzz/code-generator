@@ -1,5 +1,5 @@
 group 'cn.org.rapid_framework.genetator'
-version '1.5.4'
+version '1.04'
 
 apply plugin: 'java'
 
