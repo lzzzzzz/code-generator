@@ -45,7 +45,7 @@ public class test2 {
         BufferedWriter bufw = new BufferedWriter(new OutputStreamWriter(System.out));
         System.out.println("请输入需要转换的文件路径：");
         String line =null;
-        int number=2589;
+        int number=3252;
         while((line=bufr.readLine())!=null)    {
             if("over".equals(line)) {
                 //判断输入over，就结束循环
