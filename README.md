@@ -16,7 +16,7 @@
   * **v1.02:  compile 'com.github.lzzzzzz:code-generator:v1.02'**
   * **v1.03:  compile 'com.github.lzzzzzz:code-generator:v1.03'**
   * **v1.04:  compile 'com.github.lzzzzzz:code-generator:v1.04'**
-  * **v1.04.2:  compile 'com.github.lzzzzzz:code-generator:v1.04.2'**
+  * **v1.04.2:  compile 'com.github.lzzzzzz:code-generator:v1.04.2'**
 
 
 ## 2.模板及生成文件目录说明：
