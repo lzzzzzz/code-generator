@@ -18,11 +18,11 @@ public class DMMakerFactory {
     /**读取数据库表生成实体类和模板源码*/
     private DMMakerFactory(){}
 
-    public static DMMakerFactory build(String DRIVER, String URL, String USERNAME, String PASSWORD){
+    public static DMMakerFactory build(int DB_VERSION, String URL, String USERNAME, String PASSWORD){
         if(null==instance){
             instance = new DMMakerFactory();
         }
-        databaseUtil = new DatabaseUtil(DRIVER,URL,USERNAME,PASSWORD);
+        databaseUtil = new DatabaseUtil(DB_VERSION, URL, USERNAME,PASSWORD);
         return instance;
     }
 
@@ -93,6 +93,6 @@ public class DMMakerFactory {
         String URL = "jdbc:mysql://39.108.123.150:3306/tb_han?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
         String USERNAME = "user_lz";
         String PASSWORD = "lz_627458";
-        DMMakerFactory.build(DRIVER,URL,USERNAME,PASSWORD).start();
+        DMMakerFactory.build(DatabaseUtil.DB_VERSION_5,URL,USERNAME,PASSWORD).start();
     }
 }

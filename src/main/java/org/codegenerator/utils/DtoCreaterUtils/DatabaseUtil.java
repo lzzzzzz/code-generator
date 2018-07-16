@@ -8,17 +8,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseUtil {
+
+    public static final int DB_VERSION_5=5;
+    public static final int DB_VERSION_8=8;
+    private static final String DB_DRIVER_5= "com.mysql.jdbc.Driver";
+    private static final String DB_DRIVER_8= "com.mysql.cj.jdbc.Driver";
     private final static Logger LOGGER = LoggerFactory.getLogger(DatabaseUtil.class);
 
-    private static  String DRIVER = "com.mysql.jdbc.Driver";
+    /**数据库驱动*/
+    private static  String DRIVER = DB_DRIVER_5;
     private static  String URL = "jdbc:mysql://39.108.123.150:3306/tb_han?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
+    /**数据库用户名*/
     private static  String USERNAME = "user_lz";
+    /**数据库密码*/
     private static  String PASSWORD = "lz_627458";
 
+    /**数据库名称*/
+    private static String DB_NAME="";
+
+    /**数据库版本*/
+    private static int DB_VERSION= DB_VERSION_5;
+
     private static final String SQL = "SELECT * FROM ";// 数据库操作
-    public DatabaseUtil(String DRIVER, String URL, String USERNAME, String PASSWORD){
-        this.DRIVER = DRIVER;
+    public DatabaseUtil(int DB_VERSION, String URL, String USERNAME, String PASSWORD){
+        this.DB_VERSION=DB_VERSION;
+        if(DB_VERSION==DB_VERSION_8){
+            DRIVER = DB_DRIVER_8;
+        }
+        if(null==URL||URL.isEmpty()){
+            throw new RuntimeException("URL 不合法");
+        }
         this.URL = URL;
+        this.DB_NAME=getDBName(URL);
         this.USERNAME = USERNAME;
         this.PASSWORD = PASSWORD;
         validate();
@@ -107,7 +128,11 @@ public class DatabaseUtil {
             //获取数据库的元数据
             DatabaseMetaData db = conn.getMetaData();
             //从元数据中获取到所有的表名
-            rs = db.getTables(null, null, null, new String[] { "TABLE" });
+            if(DB_VERSION==DB_VERSION_5){
+                rs = db.getTables(null, null, null, new String[] { "TABLE" });
+            }else if(DB_VERSION==DB_VERSION_8){
+            rs = db.getTables(DB_NAME, DB_NAME, null, new String[] { "TABLE" });
+            }
             while(rs.next()) {
                 tableNames.add(rs.getString(3));
             }
@@ -262,5 +287,16 @@ public class DatabaseUtil {
             return "Blod";
         }
         return null;
+    }
+
+    /**根据URL获取数据库名*/
+    private String getDBName(String url){
+        if(null==url){
+            return null;
+        }
+        String[] sArray = url.split("/");
+        int end = sArray[3].indexOf("?");
+        String name = sArray[3].substring(0,end);
+        return name;
     }
 }

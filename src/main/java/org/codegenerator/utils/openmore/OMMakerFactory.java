@@ -17,7 +17,7 @@ public class OMMakerFactory{
     /**指定模板名和目标文件名生成源码文件
      * @param model_file_name: 模板文件名称
      * @param base_package: 生成文件一级目录
-     * @param base_package: 生成文件二级目录级目录
+     * @param sub_package: 生成文件二级目录
      * @param fileName: 生成文件名称
      * @param root: 所需元素
      * */
