@@ -12,12 +12,7 @@
       }
 ~~~
 依赖(分版本)：
-  * **v1.01:  compile 'com.github.lzzzzzz:code-generator:v1.01'**
-  * **v1.02:  compile 'com.github.lzzzzzz:code-generator:v1.02'**
-  * **v1.03:  compile 'com.github.lzzzzzz:code-generator:v1.03'**
-  * **v1.04:  compile 'com.github.lzzzzzz:code-generator:v1.04'**
-  * **v1.04.2:  compile 'com.github.lzzzzzz:code-generator:v1.04.2'**
-  * **v1.04.5:  compile 'com.github.lzzzzzz:code-generator:1.04.5'**
+  * **v1.05:  compile 'com.github.lzzzzzz:code-generator:v1.05'**
 
 
 ## 2.模板及生成文件目录说明：
@@ -27,12 +22,12 @@
   * 项目源码默认输出template/template-resource目录下，openmore源码文件指定生成在目标目录下
 
 
-主要工具类：FreeMakerFactory.java   openmore 项目定制内容(OMMakerFactory.java、DMMakerFactory.java)
+主要工具类：FreeMakerFactory.java、 openmore 项目定制内容(OMMakerFactory.java、DMMakerFactory.java)
 
 
 ## 3.使用方法：
 
-   ### 基本功能
+   ### 公共基本功能
      /**
      * 此方法用于生成源码(同时生成目标文件)
      * @param modelFileName 模板文件名
@@ -83,34 +78,21 @@
     public static DtoResponse freeMaker(String model_file_name, Map<String, Object> root ){...} 
     
 ## 3.版本说明：
-  ### v1.01:
-  * 初版 实现指定模板传入所需元素生成源码基本功能
-  ### v1.02:
-  * 修改返回值错误状态码
-  ### v1.03:
-  * 修改异常捕获方式（非抛出式）    
-  ### v1.04:
-  * FreeMakerFactory基本功能库不受影响
-  * openmore定制内容方法参数中添加生成文件目录的一级包铭和二级包名，用于文件内使用和创建生成文件在制定位置
-  ### v1.04.2:
-  * FreeMakerFactory基本功能库不受影响
-  * openmore定制内容生成固定包名下源码文件
-   ### 1.04.5:
+新版本从v1.05开始添加新旧mysql数据库支持，旧版本请更新
+    
+    ### 1.05新加基础功能:
   * FreeMakerFactory基本功能库不受影响
   * openmore定制内容生成固定包名下源码文件
   * 添加DMMakerFactory工厂类，读取数据库表映射生成实体类等模板源码
   * DMMakerFactory使用示例：
   
-          String DRIVER = "com.mysql.jdbc.Driver";
           String URL = "jdbc:mysql://localhost:3306/dbname?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
           String USERNAME = "root";
           String PASSWORD = "root";
-          DMMakerFactory.build(DRIVER,URL,USERNAME,PASSWORD).start();//根据命令行提示操作
-          DMMakerFactory.build(DRIVER,URL,USERNAME,PASSWORD).createAll();//直接根据所有表生成模板源码
+          DMMakerFactory.build(DatabaseUtil.DB_VERSION_8,URL,USERNAME,PASSWORD).start();//根据命令行提示操作
+          DMMakerFactory.build(DatabaseUtil.DB_VERSION_8,URL,USERNAME,PASSWORD).createAll();//直接根据所有表生成模板源码
     
-    
-    
-    
+   DB_VERSION_5、 DB_VERSION_8 为新旧版本支持添加内容，旧版mysql8以下使用com.mysql.jdbc.Driver驱动，新版本使用com.mysql.cj.jdbc.Driver驱动
     
     
     
