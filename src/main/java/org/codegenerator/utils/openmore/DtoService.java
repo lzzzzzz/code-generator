@@ -22,7 +22,7 @@ public class DtoService {
      * 传入所需元素参数生成（可选）目标文件
      * @param om: 封装参数模型
      * */
-    public DtoResponse pageCreateDto(OpenMoreEntity om){
+    public DtoResponse pageCreateByOM(OpenMoreEntity om){
        if(null==om) {
            return new DtoResponse(new Exception("参数错误"));
        }
