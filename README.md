@@ -102,9 +102,9 @@
   * DMMakerFactory使用示例：
   
           String DRIVER = "com.mysql.jdbc.Driver";
-          String URL = "jdbc:mysql://39.108.123.150:3306/tb_han?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
-          String USERNAME = "user_lz";
-          String PASSWORD = "lz_627458";
+          String URL = "jdbc:mysql://localhost:3306/dbname?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
+          String USERNAME = "root";
+          String PASSWORD = "root";
           DMMakerFactory.build(DRIVER,URL,USERNAME,PASSWORD).start();//根据命令行提示操作
           DMMakerFactory.build(DRIVER,URL,USERNAME,PASSWORD).createAll();//直接根据所有表生成模板源码
     
