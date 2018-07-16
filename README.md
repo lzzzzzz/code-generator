@@ -17,7 +17,7 @@
   * **v1.03:  compile 'com.github.lzzzzzz:code-generator:v1.03'**
   * **v1.04:  compile 'com.github.lzzzzzz:code-generator:v1.04'**
   * **v1.04.2:  compile 'com.github.lzzzzzz:code-generator:v1.04.2'**
-  * **v1.04.5:  compile 'com.github.lzzzzzz:code-generator:v1.04.5'**
+  * **v1.04.5:  compile 'com.github.lzzzzzz:code-generator:1.04.5'**
 
 
 ## 2.模板及生成文件目录说明：
@@ -95,16 +95,16 @@
   ### v1.04.2:
   * FreeMakerFactory基本功能库不受影响
   * openmore定制内容生成固定包名下源码文件
-   ### v1.04.05:
+   ### 1.04.5:
   * FreeMakerFactory基本功能库不受影响
   * openmore定制内容生成固定包名下源码文件
   * 添加DMMakerFactory工厂类，读取数据库表映射生成实体类等模板源码
   * DMMakerFactory使用示例：
   
           String DRIVER = "com.mysql.jdbc.Driver";
-          String URL = "jdbc:mysql://39.108.123.150:3306/tb_han?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
-          String USERNAME = "user_lz";
-          String PASSWORD = "lz_627458";
+          String URL = "jdbc:mysql://localhost:3306/dbname?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
+          String USERNAME = "root";
+          String PASSWORD = "root";
           DMMakerFactory.build(DRIVER,URL,USERNAME,PASSWORD).start();//根据命令行提示操作
           DMMakerFactory.build(DRIVER,URL,USERNAME,PASSWORD).createAll();//直接根据所有表生成模板源码
     
