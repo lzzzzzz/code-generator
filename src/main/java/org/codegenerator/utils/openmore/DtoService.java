@@ -15,6 +15,9 @@ import java.util.*;
 public class DtoService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**一级目录名*/
+    private String base_package="org.openmore";
+
     /**
      * 传入所需元素参数生成（可选）目标文件
      * @param om: 封装参数模型
@@ -25,6 +28,10 @@ public class DtoService {
        }
        return pageCreateDto(om.getModel_name(),om.getClassName(),om.getClassName_zn(),
                om.getAttrs(),om.getController_desc(),om.getFlag_create_file());
+    }
+
+    public void setBasePackage(String base_package){
+        this.base_package = base_package;
     }
 
 /**
@@ -98,7 +105,7 @@ public class DtoService {
             //root.put("attrs", attrs);
             root.put("controller_desc", controller_desc);
             root.put("attrs",att);
-            String base_pa="org.openmore";
+            String base_pa= base_package;
             if(flag_creat_file){//创建文件
                 for(Iterator<String> i = model_names.keySet().iterator(); i.hasNext();){
                     DtoResponse re=null;

@@ -15,6 +15,9 @@ public class DMMakerFactory {
 
     private static DatabaseUtil databaseUtil;
 
+    /**设置一级目录包名*/
+    private String basePackage="org.openmore";
+
     /**读取数据库表生成实体类和模板源码*/
     private DMMakerFactory(){}
 
@@ -24,6 +27,12 @@ public class DMMakerFactory {
         }
         databaseUtil = new DatabaseUtil(DB_VERSION, URL, USERNAME,PASSWORD);
         return instance;
+    }
+    /**设置一级目录包名*/
+    public DMMakerFactory setBasePackage(String basePackage){
+        if(null!=basePackage&&!basePackage.isEmpty())
+        this.basePackage=basePackage;
+        return this;
     }
 
     /**命令行提示操作*/
@@ -78,6 +87,7 @@ public class DMMakerFactory {
         Gson gson=new Gson();
         String attrs=gson.toJson(dps);
         DtoService service=new DtoService();
+        service.setBasePackage(basePackage);
         DtoResponse re= service.pageCreateDto(t, databaseUtil.initcap(tableName),
                 null,attrs,null,true);
         if(re.getResponseCode()==DtoResponse.RESPONSE_CODE_SUCCESS){
