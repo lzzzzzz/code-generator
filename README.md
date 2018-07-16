@@ -17,7 +17,7 @@
   * **v1.03:  compile 'com.github.lzzzzzz:code-generator:v1.03'**
   * **v1.04:  compile 'com.github.lzzzzzz:code-generator:v1.04'**
   * **v1.04.2:  compile 'com.github.lzzzzzz:code-generator:v1.04.2'**
-  * **v1.04.5:  compile 'com.github.lzzzzzz:code-generator:v1.04.5'**
+  * **v1.04.5:  compile 'com.github.lzzzzzz:code-generator:1.04.5'**
 
 
 ## 2.模板及生成文件目录说明：
@@ -95,7 +95,7 @@
   ### v1.04.2:
   * FreeMakerFactory基本功能库不受影响
   * openmore定制内容生成固定包名下源码文件
-   ### v1.04.05:
+   ### 1.04.5:
   * FreeMakerFactory基本功能库不受影响
   * openmore定制内容生成固定包名下源码文件
   * 添加DMMakerFactory工厂类，读取数据库表映射生成实体类等模板源码
