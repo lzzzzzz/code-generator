@@ -14,7 +14,7 @@ public class SecurityUtils {
      * @param str
      * @return
      */
-    public static String md5(String str) throws Exception{
+    public static String md5(String str) throws Exception {
         try {
             // 生成一个MD5加密计算摘要
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -30,10 +30,11 @@ public class SecurityUtils {
 
     /**
      * 获取指定位数的的string随机数，随机范围为A-Z 2-9
+     *
      * @param length string的长度
      * @return 指定lenght的随机字符串
      */
-    public  static  String randomString(int length){
+    public static String randomString(int length) {
         // 去掉I,O, 0, 1
         String str = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
         Random random = new Random();

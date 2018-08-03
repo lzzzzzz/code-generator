@@ -22,23 +22,25 @@ public class FreeMakerFactory {
 
     private static FreeMakerFactory instance;
 
-    /**freeMaker配置设置*/
-    private Configuration cfg=null;
+    /**
+     * freeMaker配置设置
+     */
+    private Configuration cfg = null;
 
-    public static FreeMakerFactory getInstance() throws Exception{
-        if(instance==null){
-            instance=new FreeMakerFactory();
+    public static FreeMakerFactory getInstance() throws Exception {
+        if (instance == null) {
+            instance = new FreeMakerFactory();
         }
         return instance;
     }
 
-    private FreeMakerFactory() throws Exception{
+    private FreeMakerFactory() throws Exception {
         try {
             cfg = new Configuration(Configuration.VERSION_2_3_22);
             //配置模板所在目录(模板需要放在此目录或子目录下)
-            List<String> paths= DtoFileUtils.getModelDirectory();
-            FileTemplateLoader[] fileLoaders=new FileTemplateLoader[paths.size()];
-            for(int i = 0; i < paths.size(); i++) {
+            List<String> paths = DtoFileUtils.getModelDirectory();
+            FileTemplateLoader[] fileLoaders = new FileTemplateLoader[paths.size()];
+            for (int i = 0; i < paths.size(); i++) {
                 fileLoaders[i] = new FileTemplateLoader(new File(paths.get(i)));
             }
             MultiTemplateLoader multiTemplateLoader = new MultiTemplateLoader(fileLoaders);
@@ -56,34 +58,35 @@ public class FreeMakerFactory {
         }
     }
 
-    public Configuration getConfiguration(){
+    public Configuration getConfiguration() {
         return this.cfg;
     }
 
     /**
      * 此方法用于生成源码
+     *
      * @param modelFileName 模板文件名
-     * @param out_file 要生成的文件
-     * @param root 模板所需参数
-     * */
+     * @param out_file      要生成的文件
+     * @param root          模板所需参数
+     */
     public DtoResponse freeMaker(String modelFileName, File out_file, Map<String, Object> root) {
-        try{
+        try {
             //设置输出源码文件
-            if(out_file.isDirectory()){
-                logger.error("Freemaker请指定正确数据输出文件路径=>file_path：("+out_file.getPath()+")");
-                return new DtoResponse(new RuntimeException("请指定正确数据输出文件路径=>file_path：("+out_file.getPath()+")"));
+            if (out_file.isDirectory()) {
+                logger.error("Freemaker请指定正确数据输出文件路径=>file_path：(" + out_file.getPath() + ")");
+                return new DtoResponse(new RuntimeException("请指定正确数据输出文件路径=>file_path：(" + out_file.getPath() + ")"));
             }
-            if(!out_file.exists()){
-                if(!out_file.getParentFile().exists()){
-                    if(!out_file.getParentFile().mkdirs()) {
-                        return new DtoResponse(new RuntimeException("创建目标文件目录失败=>file_path：("+out_file.getPath()+")"));
+            if (!out_file.exists()) {
+                if (!out_file.getParentFile().exists()) {
+                    if (!out_file.getParentFile().mkdirs()) {
+                        return new DtoResponse(new RuntimeException("创建目标文件目录失败=>file_path：(" + out_file.getPath() + ")"));
                     }
                 }
                 out_file.createNewFile();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            logger.error("Freemaker指定了错误数据输出文件=>file_path：("+out_file.getPath()+")");
+            logger.error("Freemaker指定了错误数据输出文件=>file_path：(" + out_file.getPath() + ")");
             return new DtoResponse(new RuntimeException("请指定正确数据输出文件"));
         }
         //生成文件
@@ -97,34 +100,36 @@ public class FreeMakerFactory {
             fos.flush();
             fos.close();
             out.close();
-            return freeMaker(modelFileName,root);
-        }catch (Exception e){
+            return freeMaker(modelFileName, root);
+        } catch (Exception e) {
             return new DtoResponse(new RuntimeException("请指定正确数据输出文件"));
         }
     }
+
     /**
      * 此方法用于生成源码
+     *
      * @param modelFileName 模板文件名
-     * @param fileName 要生成的文件名
-     * @param root 模板所需参数
-     * */
-    public DtoResponse freeMaker(String modelFileName,String fileName,Map<String, Object> root){
+     * @param fileName      要生成的文件名
+     * @param root          模板所需参数
+     */
+    public DtoResponse freeMaker(String modelFileName, String fileName, Map<String, Object> root) {
         try {
             //设置源码根目录
             String source_path = DtoFileUtils.getGeneratorConfigFileName(FreeMakerConfig.GENERATOR_CONFIG_FILE_NAME);
             source_path = PropertiesUtils.getPropertyValueByKey(source_path, "outRoot");//java文件的生成目录
             if (null == source_path || "".equals(source_path)) {
                 //自定义目录不存在则使用默认目录
-                source_path = FreeMakerConfig.ROOT_PATH + "\\" + FreeMakerConfig.DEFAULT_SOURCES_DIRECTORY;
+                source_path = FreeMakerConfig.ROOT_PATH + File.separator + FreeMakerConfig.DEFAULT_SOURCES_DIRECTORY;
             } else {
-                source_path = FreeMakerConfig.ROOT_PATH + "\\" + source_path;
+                source_path = FreeMakerConfig.ROOT_PATH + File.separator + source_path;
                 File source_dir = new File(source_path);
                 if (!source_dir.exists()) {
                     source_dir.mkdirs();
                 }
             }
             //设置输出源码文件
-            File out_file = new File(source_path + "\\" + fileName);
+            File out_file = new File(source_path + File.separator + fileName);
             if (out_file.isDirectory()) {
                 logger.error("请指定数据输出文件，而非目录：" + out_file.getPath());
                 return new DtoResponse(new RuntimeException("请指定数据输出文件，而非目录：" + out_file.getPath()));
@@ -142,17 +147,19 @@ public class FreeMakerFactory {
             fos.flush();
             fos.close();
             out.close();
-            return freeMaker(modelFileName , root);
-        }catch ( Exception e){
+            return freeMaker(modelFileName, root);
+        } catch (Exception e) {
             return new DtoResponse(e);
         }
     }
+
     /**
      * 此方法用于生成源码
+     *
      * @param modelFileName 模板文件名
-     * @param root 模板所需参数
-     * */
-    public DtoResponse freeMaker(String modelFileName, Map<String, Object> root){
+     * @param root          模板所需参数
+     */
+    public DtoResponse freeMaker(String modelFileName, Map<String, Object> root) {
 
         try {
             //加载模板
@@ -164,12 +171,12 @@ public class FreeMakerFactory {
             writer.flush();
             writer.close();
             return new DtoResponse(stringWriter.toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             return new DtoResponse(e);
         }
     }
 
-    public String freeMakerControlMethod(String modelFileName, Map<String, Object> root){
+    public String freeMakerControlMethod(String modelFileName, Map<String, Object> root) {
         return null;
     }
 }

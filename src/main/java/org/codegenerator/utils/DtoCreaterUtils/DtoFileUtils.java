@@ -15,39 +15,46 @@ import java.util.List;
  */
 public class DtoFileUtils {
 
-    /**获取资源配置文件()*/
-    public static String getGeneratorConfigFileName(String fileName){
-        try{
+    /**
+     * 获取资源配置文件()
+     */
+    public static String getGeneratorConfigFileName(String fileName) {
+        try {
             ResourceLoader loader = new DefaultResourceLoader();
             //注意这里前缀不能使用“classpath*:”，这样不能真正访问到对应的资源，exists()返回false
-            Resource resource = loader.getResource("classpath:"+fileName);
+            Resource resource = loader.getResource("classpath:" + fileName);
             return resource.getURI().getPath();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    /**获取模板根目录*/
-    public static String getRootGeneratorDirectory() throws Exception{
-            String projectPath= FreeMakerConfig.ROOT_PATH+"\\"+ FreeMakerConfig.MODEL_ROOT_DIRECTORY;
-            File file=new File(projectPath);
-            if(!file.exists()){
-                file.mkdirs();
-            }
-            return projectPath;
+    /**
+     * 获取模板根目录
+     */
+    public static String getRootGeneratorDirectory() throws Exception {
+        String projectPath = FreeMakerConfig.ROOT_PATH + File.separator + FreeMakerConfig.MODEL_ROOT_DIRECTORY;
+        File file = new File(projectPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return projectPath;
     }
-    /**获取模板存放路径*/
-    public static List<String> getModelDirectory() throws Exception{
+
+    /**
+     * 获取模板存放路径
+     */
+    public static List<String> getModelDirectory() throws Exception {
         try {
             //模板根目录路径
-            String projectPath=getRootGeneratorDirectory();
-            System.out.println("projectPath:"+projectPath);
-            File f=new File(projectPath);
-            if(!f.exists()){
-                    f.mkdirs();
+            String projectPath = getRootGeneratorDirectory();
+            System.out.println("projectPath:" + projectPath);
+            File f = new File(projectPath);
+            if (!f.exists()) {
+                f.mkdirs();
             }
-            List<String> paths=new ArrayList<String>();
+            List<String> paths = new ArrayList<String>();
             paths.add(projectPath);
             return DtoFileUtils.getAllFiles(new File(projectPath), paths);
         } catch (IOException e) {
@@ -55,24 +62,24 @@ public class DtoFileUtils {
             throw new Exception("模板路径异常");
         }
     }
-    /**获取某一目录下所有层级目录*/
-    public static List<String> getAllFiles(File dir, List<String> resultPath)
-    {
-        File[] files=dir.listFiles();
-        if(null==files){
+
+    /**
+     * 获取某一目录下所有层级目录
+     */
+    public static List<String> getAllFiles(File dir, List<String> resultPath) {
+        File[] files = dir.listFiles();
+        if (null == files) {
             return resultPath;
         }
-        for(int i=0;i<files.length;i++)
-        {
-            if(files[i].isDirectory()){//是目录则保存路径
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isDirectory()) {//是目录则保存路径
                 //这里面用了递归的算法
-                String path=files[i].getPath();
+                String path = files[i].getPath();
                 resultPath.add(path);
                 getAllFiles(files[i], resultPath);
-            }
-            else {
+            } else {
                 //是文件
-               // System.out.println(getLevel(level)+files[i]);
+                // System.out.println(getLevel(level)+files[i]);
             }
         }
         return resultPath;
