@@ -12,7 +12,7 @@
       }
 ~~~
 依赖(分版本)：
-  * **v1.05:  compile 'com.github.lzzzzzz:code-generator:v1.05'**
+  * **v1.06:  compile 'com.github.lzzzzzz:code-generator:v1.06'**
 
 
 ## 2.模板及生成文件目录说明：
