@@ -1,5 +1,7 @@
 package org.codegenerator.utils.DtoCreaterUtils;
 
+import org.springframework.util.StringUtils;
+
 import java.io.File;
 
 /**
@@ -11,6 +13,12 @@ public class FreeMakerConfig {
      * 默认模块根目录
      */
     public static String ROOT_PATH = System.getProperty("user.dir") + File.separator + "template";
+    public static String getROOTPATH(String modulePackage){
+        if(!StringUtils.isEmpty(modulePackage)){
+            return System.getProperty("user.dir") + modulePackage + File.separator + "template";
+        }
+        return System.getProperty("user.dir") + File.separator + "template";
+    }
 
     /**
      * 默认配置文件名称

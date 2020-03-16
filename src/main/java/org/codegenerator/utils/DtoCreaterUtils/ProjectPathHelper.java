@@ -22,7 +22,7 @@ public class ProjectPathHelper {
         try {
             String project_path = System.getProperty("user.dir");
             if(!StringUtils.isEmpty(modulePackage)){
-                project_path += "/"+modulePackage;
+                project_path += File.separator +modulePackage;
             }
             base_str = PropertiesUtils.getPropertyValueByKey(DtoFileUtils.getGeneratorConfigFileName(FreeMakerConfig.GENERATOR_CONFIG_FILE_NAME), FreeMakerConfig.DEFAULT_BASEPACKAGE_KEY);
             if (null == base_str || "".equals(base_str)) {
@@ -46,11 +46,11 @@ public class ProjectPathHelper {
      */
     public String getBasepackagePath(String base_path_str, String modlePackage) {
         String base_str = base_path_str;
-        if(!StringUtils.isEmpty(modlePackage)){
-            base_str += "/" + modlePackage;
-        }
         try {
             String project_path = System.getProperty("user.dir");
+            if(!StringUtils.isEmpty(modlePackage)){
+                project_path += File.separator  + modlePackage;
+            }
             if (null == base_str || "".equals(base_str)) {
                 return null;
             } else {
