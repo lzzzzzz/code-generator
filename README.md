@@ -12,7 +12,7 @@
       }
 ~~~
 依赖(分版本)：
-  * **v1.06:  compile 'com.github.lzzzzzz:code-generator:v1.06'**
+  * **v1.07:  compile 'com.github.lzzzzzz:code-generator:v1.07'**
 
 
 ## 2.模板及生成文件目录说明：
@@ -61,8 +61,8 @@
      * @param fileName: 生成文件名称
      * @param root: 所需元素
      * */
-    public static DtoResponse freeMaker(String model_file_name, String base_package, String sub_package, 
-    String fileName , Map<String, Object> root ){...}
+    public static DtoResponse freeMaker(String model_file_name, String base_package, String modulePackage,
+        String sub_package, String fileName , Map<String, Object> root ){...}
     
     /**指定模板名和目标文件名生成
     源码文件 * @param model_file_name: 模板文件名称
@@ -84,6 +84,7 @@
   * FreeMakerFactory基本功能库不受影响
   * openmore定制内容生成固定包名下源码文件
   * 添加DMMakerFactory工厂类，读取数据库表映射生成实体类等模板源码
+  *添加项目多模块支持
   * DMMakerFactory使用示例：
   
           String URL = "jdbc:mysql://localhost:3306/dbname?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
