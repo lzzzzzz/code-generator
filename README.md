@@ -84,7 +84,7 @@
   * FreeMakerFactory基本功能库不受影响
   * openmore定制内容生成固定包名下源码文件
   * 添加DMMakerFactory工厂类，读取数据库表映射生成实体类等模板源码
-  *添加项目多模块支持
+  * 添加项目多模块支持
   * DMMakerFactory使用示例：
   
           String URL = "jdbc:mysql://localhost:3306/dbname?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
