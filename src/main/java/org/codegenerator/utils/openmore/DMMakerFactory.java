@@ -24,7 +24,7 @@ public class DMMakerFactory {
     /**
      * 模块名
      */
-    private String modluePackage;
+    private String modulePackage;
 
     /**
      * 读取数据库表生成实体类和模板源码
@@ -53,7 +53,7 @@ public class DMMakerFactory {
      */
     public DMMakerFactory setModulePackage(String modulePackage) {
         if (!StringUtils.isEmpty(modulePackage)){
-            this.basePackage = basePackage;
+            this.modulePackage = modulePackage;
         }
         return this;
     }
@@ -115,7 +115,7 @@ public class DMMakerFactory {
         String attrs = gson.toJson(dps);
         DtoService service = new DtoService();
         service.setBasePackage(basePackage);
-        service.setModluePackage(modluePackage);
+        service.setModluePackage(modulePackage);
         DtoResponse re = service.pageCreateDto(t, databaseUtil.initcap(tableName),
                 null, attrs, null, true);
         if (re.getResponseCode() == DtoResponse.RESPONSE_CODE_SUCCESS) {
