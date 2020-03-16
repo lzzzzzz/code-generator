@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.codegenerator.entity.DtoResponse;
 import org.codegenerator.utils.DtoCreaterUtils.DatabaseUtil;
 import org.codegenerator.utils.DtoCreaterUtils.DtoParam;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,11 @@ public class DMMakerFactory {
      * 设置一级目录包名
      */
     private String basePackage = "org.openmore";
+
+    /**
+     * 模块名
+     */
+    private String modluePackage;
 
     /**
      * 读取数据库表生成实体类和模板源码
@@ -40,6 +46,15 @@ public class DMMakerFactory {
     public DMMakerFactory setBasePackage(String basePackage) {
         if (null != basePackage && !basePackage.isEmpty())
             this.basePackage = basePackage;
+        return this;
+    }
+    /**
+     * 设置模块名
+     */
+    public DMMakerFactory setModulePackage(String modulePackage) {
+        if (!StringUtils.isEmpty(modulePackage)){
+            this.basePackage = basePackage;
+        }
         return this;
     }
 
@@ -100,6 +115,7 @@ public class DMMakerFactory {
         String attrs = gson.toJson(dps);
         DtoService service = new DtoService();
         service.setBasePackage(basePackage);
+        service.setModluePackage(modluePackage);
         DtoResponse re = service.pageCreateDto(t, databaseUtil.initcap(tableName),
                 null, attrs, null, true);
         if (re.getResponseCode() == DtoResponse.RESPONSE_CODE_SUCCESS) {
@@ -112,10 +128,9 @@ public class DMMakerFactory {
 
     //TODO: 此处测试需要加上jdbc-connector对应版本依赖
     public static void main(String[] args) {
-        String DRIVER = "com.mysql.jdbc.Driver";
-        String URL = "jdbc:mysql://localhost:3306/tb_han?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
+        String URL = "jdbc:mysql://localhost:3307/qu?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8";
         String USERNAME = "root";
-        String PASSWORD = "Virus627458";
+        String PASSWORD = "root";
         DMMakerFactory.build(DatabaseUtil.DB_VERSION_8, URL, USERNAME, PASSWORD).start();
     }
 }

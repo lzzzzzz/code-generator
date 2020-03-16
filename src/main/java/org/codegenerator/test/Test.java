@@ -33,7 +33,7 @@ public class Test {
     private static void test1(){
         ProjectPathHelper helper=new ProjectPathHelper();
         //String path=helper.getSubPackagePath("controller");
-        String path=helper.getBasepackagePath("com.openmore");
+        String path=helper.getBasepackagePath("com.openmore", null);
         System.out.println(path);
     }
     private static void test2(){

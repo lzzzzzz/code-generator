@@ -4,6 +4,7 @@ import org.codegenerator.utils.DtoCreaterUtils.DtoFileUtils;
 import org.codegenerator.utils.DtoCreaterUtils.FreeMakerConfig;
 import org.codegenerator.utils.DtoCreaterUtils.PropertiesUtils;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 
@@ -16,10 +17,13 @@ public class ProjectPathHelper {
     /**
      * 获取项目包路径
      */
-    public String getNormalBasepackagePath() {
+    public String getNormalBasepackagePath(String modulePackage) {
         String base_str = "";
         try {
             String project_path = System.getProperty("user.dir");
+            if(!StringUtils.isEmpty(modulePackage)){
+                project_path += "/"+modulePackage;
+            }
             base_str = PropertiesUtils.getPropertyValueByKey(DtoFileUtils.getGeneratorConfigFileName(FreeMakerConfig.GENERATOR_CONFIG_FILE_NAME), FreeMakerConfig.DEFAULT_BASEPACKAGE_KEY);
             if (null == base_str || "".equals(base_str)) {
                 return null;
@@ -37,12 +41,14 @@ public class ProjectPathHelper {
             return null;
         }
     }
-
     /**
      * 获取项目包路径
      */
-    public String getBasepackagePath(String base_path_str) {
+    public String getBasepackagePath(String base_path_str, String modlePackage) {
         String base_str = base_path_str;
+        if(!StringUtils.isEmpty(modlePackage)){
+            base_str += "/" + modlePackage;
+        }
         try {
             String project_path = System.getProperty("user.dir");
             if (null == base_str || "".equals(base_str)) {
@@ -65,8 +71,8 @@ public class ProjectPathHelper {
     /**
      * 获取二级包名路径
      */
-    public String getNormalSubPackagePath() {
-        String base_path = getNormalBasepackagePath();
+    public String getNormalSubPackagePath(String modlePackage) {
+        String base_path = getNormalBasepackagePath(modlePackage);
         if (null == base_path || "".equals(base_path)) {
             return null;
         }
@@ -89,8 +95,8 @@ public class ProjectPathHelper {
     /**
      * 获取二级包名路径
      */
-    public String getSubPackagePath(String file_name_path_str) {
-        String base_path = getNormalBasepackagePath();
+    public String getSubPackagePath(String file_name_path_str, String modlePackage) {
+        String base_path = getNormalBasepackagePath(modlePackage);
         if (null == base_path || "".equals(base_path)) {
             return null;
         }
@@ -112,8 +118,8 @@ public class ProjectPathHelper {
     /**
      * 获取二级包名路径
      */
-    public String getSubPackagePath(String base_file_path, String file_name_path_str) {
-        String base_path = getBasepackagePath(base_file_path);
+    public String getSubPackagePath(String base_file_path, String file_name_path_str, String modulePackage) {
+        String base_path = getBasepackagePath(base_file_path, modulePackage);
         if (null == base_path || "".equals(base_path)) {
             return null;
         }

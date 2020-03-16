@@ -21,6 +21,11 @@ public class DtoService {
     private String base_package = "org.openmore";
 
     /**
+     * 模块名
+     */
+    private String modluePackage;
+
+    /**
      * 传入所需元素参数生成（可选）目标文件
      *
      * @param om: 封装参数模型
@@ -33,8 +38,18 @@ public class DtoService {
                 om.getAttrs(), om.getController_desc(), om.getFlag_create_file());
     }
 
-    public void setBasePackage(String base_package) {
+    public DtoService setBasePackage(String base_package) {
         this.base_package = base_package;
+        return this;
+    }
+
+    public String getModluePackage() {
+        return modluePackage;
+    }
+
+    public DtoService setModluePackage(String modluePackage) {
+        this.modluePackage = modluePackage;
+        return this;
     }
 
     /**
@@ -116,7 +131,7 @@ public class DtoService {
                     String model_name = i.next();
                     root.put("basepackage", base_pa);
                     root.put("subpackage", model_names.get(model_name));
-                    re = OMMakerFactory.freeMaker(model_name, base_pa, model_names.get(model_name), className, root);
+                    re = OMMakerFactory.freeMaker(model_name, base_pa, modluePackage, model_names.get(model_name), className, root);
                     if (re.getResponseCode() == DtoResponse.RESPONSE_CODE_ERROR) {
                         return re;
                     }
@@ -129,7 +144,7 @@ public class DtoService {
                     String model_name = i.next();
                     root.put("basepackage", base_pa);
                     root.put("subpackage", model_names.get(model_name));
-                    re = OMMakerFactory.freeMaker(model_name, base_pa, model_names.get(model_name), className, root);
+                    re = OMMakerFactory.freeMaker(model_name, base_pa, modluePackage, model_names.get(model_name), className, root);
                     if (re.getResponseCode() == DtoResponse.RESPONSE_CODE_ERROR) {
                         return re;
                     } else {

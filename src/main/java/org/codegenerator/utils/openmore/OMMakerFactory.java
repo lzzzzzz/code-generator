@@ -23,7 +23,7 @@ public class OMMakerFactory {
      * @param fileName:        生成文件名称
      * @param root:            所需元素
      */
-    public static DtoResponse freeMaker(String model_file_name, String base_package, String sub_package, String fileName, Map<String, Object> root) {
+    public static DtoResponse freeMaker(String model_file_name, String base_package, String modulePackage, String sub_package, String fileName, Map<String, Object> root) {
 
         try {
             if (null == fileName) {
@@ -47,7 +47,7 @@ public class OMMakerFactory {
                 System.out.println("freemaker未指定生成文件根目录使用默认输出目录：" + out_file_dir);
             } else {
                 ProjectPathHelper helper = new ProjectPathHelper();
-                out_file_dir = helper.getBasepackagePath(base_package);
+                out_file_dir = helper.getBasepackagePath(base_package, modulePackage);
                 String sub_str = ProjectPathHelper.splidFileName(sub_package);
                 if (null != sub_str && !"".equals(sub_str)) {
                     out_file_dir = out_file_dir + File.separator + sub_str;
