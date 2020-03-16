@@ -68,25 +68,25 @@ public class DMMakerFactory {
         for (int i = 0; i < tableNames.size(); i++) {
             System.out.println(i + 1 + ": create by " + tableNames.get(i));
         }
-        System.out.println("input unmber will do as resume：");
+        System.out.println("input number and will do as resume：");
         Scanner s = new Scanner(System.in);
         int x = s.nextInt();
-        if (x < 0) {
-            System.out.println("...cancle with do nothing");
-            return;
-        } else if (x == 0) {
-            System.out.println("start create...");
-            for (String tableName : tableNames) {
-                createByTableName(tableName);
+        while ( x >= 0){
+            if (x == 0) {
+                System.out.println("start create...");
+                for (String tableName : tableNames) {
+                    createByTableName(tableName);
+                }
+                System.out.println("...create done");
+            } else if (x > 0 && x <= tableNames.size()) {
+                System.out.println("start create...");
+                createByTableName(tableNames.get(x - 1));
+                System.out.println("...create done");
+            } else {
+                System.out.println("cancle because illegal number!");
             }
-            System.out.println("...create done");
-        } else if (x > 0 && x <= tableNames.size()) {
-            System.out.println("start create...");
-            createByTableName(tableNames.get(x - 1));
-            System.out.println("...create done");
-        } else {
-            System.out.println("cancle for illegal number!");
         }
+        System.out.println("...cancle");
     }
 
     /**
